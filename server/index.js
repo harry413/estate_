@@ -1,22 +1,38 @@
-import express from "express"
-import mongoose from "mongoose";
 import dotenv from "dotenv"
 dotenv.config();
 
+import express from "express"
+import mongoose from "mongoose";
+
+const App = express();
+
+//importing routes
+import userRouter from "./routes/userRoute.js"
+import authRouter from './routes/authRoute.js'
+
+App.use(express.json());
+App.use('/api/user', userRouter);
+App.use('/api/auth', authRouter);
+
+
+
+
+const PORT = 3000;
+
+//Database connection mongodb
 mongoose.connect(process.env.MONGO_URL).then(() => {
     console.log("Database connected successfully ")
 }).catch((err) => {
     console.log(err);
 });
 
-const App = express();
 
-const PORT = 3000;
 App.get('/', (req, res) => {
     try{
-        console.log('welcome to home!!!');
+        res.json({message:'hello welcome to home page!!!'})
     }catch(err){
         console.log(err);
+        res.json({message:err});
     }
 })
 
