@@ -1,17 +1,17 @@
 import { Routes, Route } from 'react-router-dom'
 
 //importing pages
-import Home from './Pages/Home'
-import SignIn from './Pages/SignIn'
-import SignOut from './Pages/SignOut'
-import Profile from './Pages/Profile'
-import About from './Pages/About'
-import SignUp from './pages/SignUp'
+import Home from './Pages/Home.jsx'
+import SignIn from './Pages/SignIn.jsx'
+import SignOut from './Pages/SignOut.jsx'
+import Profile from './Pages/Profile.jsx'
+import About from './Pages/About.jsx'
+import SignUp from './pages/SignUp.jsx'
 
 
 //components
-import Header from './components/Header'
-import Footer from './components/Footer'
+import Header from './components/Header.jsx'
+import Footer from './components/Footer.jsx'
 
 
 function App() {

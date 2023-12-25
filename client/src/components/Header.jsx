@@ -24,21 +24,21 @@ const Header = () => {
                 <ul className='flex gap-2 text-bold '>
                     <Link to='/'>
                         <li 
-                            className='hidden sm:inline text-slate-700 hover:text-gray-900 cursor-pointer hover:shadow-md px-2 mx-1 rounded-md'
+                            className='hidden sm:inline text-slate-700 hover:text-gray-900 cursor-pointer  px-2 mx-1 rounded-md'
                         >
                             Home
                         </li>
                     </Link>
                     <Link to='/about'>
                         <li 
-                            className='hidden sm:inline text-slate-700 hover:shadow-md px-2 mx-1 hover:text-gray-900 cursor-pointer rounded-md'
+                            className='hidden sm:inline text-slate-700  px-2 mx-1 hover:text-gray-900 cursor-pointer rounded-md'
                         >
                             About
                         </li>
                     </Link>
                     <Link to='/sign-in'>
                         <li 
-                            className='hidden sm:inline text-slate-700 hover:shadow-md px-2 mx-1 hover:text-gray-900 cursor-pointer rounded-md'
+                            className='hidden sm:inline text-slate-700  px-2 mx-1 hover:text-gray-900 cursor-pointer rounded-md'
                         >
                             Sign In
                         </li>
