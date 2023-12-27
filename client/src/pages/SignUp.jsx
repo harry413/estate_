@@ -1,5 +1,6 @@
 import {useState} from "react"
 import { Link, useNavigate } from 'react-router-dom';
+import OAuth from "../components/OAuth.jsx";
 
 
 const SignUp = () => {
@@ -70,6 +71,7 @@ const SignUp = () => {
               className='bg-slate-700 text-white p-2 rounded-lg uppercase hover:opacity-95 disabled:opacity-86'
           >{loading? 'loading...' : 'Sign Up'}
           </button>
+          <OAuth/>
       </form>
       <div className='flex p-4 items-center justify-center'>
         <p className='text-black-900'>Already have an account? </p>
