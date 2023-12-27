@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import {useSelector} from 'react-redux'
 
 //react-icons
 import { MdSearch } from 'react-icons/md'
@@ -7,6 +8,7 @@ import { GiHouse } from "react-icons/gi";
 
 
 const Header = () => {
+    const { currentUser } = useSelector((state) => state.user)
   return (
     <header className='bg-slate-200 shadow-lg rounded-bottom'>
             <div className='flex items-center justify-between max-w-6xl mx-auto p-3'>
@@ -36,12 +38,15 @@ const Header = () => {
                             About
                         </li>
                     </Link>
+                    
                     <Link to='/sign-in'>
-                        <li 
-                            className='hidden sm:inline text-slate-700  px-2 mx-1 hover:text-gray-900 cursor-pointer rounded-md'
-                        >
-                            Sign In
-                        </li>
+                        { currentUser? (
+                            <img src={currentUser.avatar} alt='profile' className='rounded-full h-8 w-8 object-cover'/>
+                        ): (
+                            <li className='hidden sm:inline text-slate-700  px-2 mx-1 hover:text-gray-900 cursor-pointer rounded-md'>
+                                Sign In
+                            </li>
+                        )}
                     </Link>
                 </ul>
             </div>
