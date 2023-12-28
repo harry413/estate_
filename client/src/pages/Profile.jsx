@@ -49,7 +49,7 @@ const Profile = () => {
           fileError  
                     ? (<span className='text-red-700'>Enable to upload image(image should be less then 2MB)</span>) 
                     : (imagePerc > 0 && imagePerc < 100 ? (
-                      <span className='text-slate-700'>{ `uploading ${imagePerc}%` }</span>) : 
+                      <span className='text-slate-700'>{`uploading ${imagePerc}%`}</span>) : 
                         (imagePerc === 100 ? (
                           <span className='text-green-700'>image uploaded successfully</span>
                         ): ''
