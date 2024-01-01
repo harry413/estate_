@@ -15,10 +15,14 @@ App.use(cors());
 //importing routes
 import userRouter from "./routes/userRoute.js"
 import authRouter from './routes/authRoute.js'
+import listingRouter from './routes/listingRoute.js'
+
+
 
 App.use(express.json());
 App.use('/api/user', userRouter);
 App.use('/api/auth', authRouter);
+App.use('/api/listing', listingRouter);
 
 App.use((err, req, res, next) => {
     const statusCode = err.statusCode|| 500;
