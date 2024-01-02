@@ -7,6 +7,7 @@ import {
         deleteUserFailure, deleteUserStart, deleteUserSuccess,
         signOutUserStart, signOutUserSuccess, signOutUserFailure
       } from '../redux/user/userSlice.js';
+import { Link } from 'react-router-dom';
 
 
 const Profile = () => {
@@ -150,6 +151,7 @@ const Profile = () => {
               className='bg-slate-700 text-white p-2 rounded-lg uppercase hover:opacity-95 disabled:opacity-86'
           >{loading ? 'Loading...' : 'Update'}
           </button>
+          <Link to={'/create-listing'} className='bg-green-700 text-white p-2 rounded-lg text-center uppercase hover:opacity-95'>Create listing </Link>
       </form>
       <div className='flex justify-between mt-5'>
         <span onClick={handleDeleteUser} className='text-red-700 cursor-pointer' >Delete account</span>
