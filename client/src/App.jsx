@@ -7,12 +7,13 @@ import SignOut from './Pages/SignOut.jsx'
 import Profile from './pages/Profile.jsx'
 import About from './Pages/About.jsx'
 import SignUp from './pages/SignUp.jsx'
-import CreateListing from './Pages/CreateListing.jsx'
+import CreateListing from './pages/createListing.jsx'
 
 //components
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import  {PrivateRoute}  from './components/PrivateRoute.jsx'
+
 
 
 
