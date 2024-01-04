@@ -2,6 +2,7 @@ import {useState} from 'react'
 import { app } from '../firebase.js'
 import {getDownloadURL, getStorage, ref, uploadBytesResumable} from 'firebase/storage'
 import { useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom'
 
 const CreateListing = () => {
     const {currentUser} = useSelector((state) => state.user);
@@ -25,7 +26,7 @@ const CreateListing = () => {
     const [uploading, setUploading] = useState(false);
     const [error, setError] = useState(false);
     const [loading , setLoading] = useState(false);
-
+    const navigate = useNavigate();
 
 
     const handleImageSubmit = (e) => {
@@ -124,6 +125,7 @@ const CreateListing = () => {
             if(data.success === false){
                 setError(data.message);
             }
+            navigate(`/listing/${data._id}`)
         } catch (error) {
             setLoading(false);
             setError(error.message);
