@@ -18,6 +18,8 @@ const Profile = () => {
   const [fileError, setFileError] = useState(false);
   const [formData, setFormData] = useState({});
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [showListingError, setShowListingError] = useState(false);
+  const [userListing, setUserListing] = useState({});
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -102,6 +104,20 @@ const Profile = () => {
         dispatch(signOutUserFailure(error.message));
       }
 
+   };
+
+   const handleShowListing = async() =>{
+    try{
+      const res = await fetch(`/api/user/listings/${currentUser._id}`);
+      const data = await res.json();
+      if(data.success === false) {
+        setShowListingError(true);
+        return;
+      }
+      setUserListing(data);
+    }catch(error){
+      setShowListingError(true);
+    }
    }
 
 
@@ -159,6 +175,27 @@ const Profile = () => {
       </div>
       <p className='text-red-700 mt-4'>{error ? error : ''}</p>
       <p className='text-green-700 mt-4'>{updateSuccess ? 'update successfully!' : ''}</p>
+      <button onClick={handleShowListing} className='text-green-700 w-full'>Show Listing</button>
+      <p className='text-red-700'>{showListingError ? 'Error in showing listings' : ''}</p>
+      {
+        userListing && userListing.length > 0 && 
+        <div className="flex flex-col gap-4">
+          <h1 className='text-center mt-6 text-2xl font-semibold'>Your Listings</h1>
+        {userListing.map((listing) => (
+          <div key={listing} className="flex justify-between p-3 items-center border rounded-lg gap-2">
+              <Link to={`/listing/${listing._id}`}>
+                <img src={listing.imageUrls[0]} alt='listing image' className='h-16 w-16 object-contain'/>
+              </Link>
+              <Link to={`/listing/${listing._id}`} className='flex-1'>
+                <p className='text-slate-600 font-semibold  hover:underline truncate'>{listing.name}</p>
+              </Link>
+              <div className="flex flex-col items-center ">
+                <button className='text-red-700 uppercase'>Delete</button>
+                <button className='text-green-700 uppercase'>Edit</button>
+              </div>
+          </div>
+        ))}
+     </div> }
     </div>
   )
 }
