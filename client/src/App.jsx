@@ -8,11 +8,14 @@ import Profile from './pages/Profile.jsx'
 import About from './Pages/About.jsx'
 import SignUp from './pages/SignUp.jsx'
 import CreateListing from './pages/createListing.jsx'
+import UpdateListing from './pages/UpdateListing.jsx'
+
 
 //components
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import  {PrivateRoute}  from './components/PrivateRoute.jsx'
+
 
 
 
@@ -29,6 +32,7 @@ function App() {
           <Route element={<PrivateRoute/>}>
             <Route path='/profile' element={<Profile/>}/>
             <Route path='/create-listing' element={<CreateListing/>}/>
+            <Route path='/update-listing/:listingId' element={<UpdateListing/>}/>
           </Route>
           <Route path='/about' element={<About/>}/>
           <Route path='/log-out' element={<SignOut/>}/>
