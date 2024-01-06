@@ -9,12 +9,13 @@ import About from './Pages/About.jsx'
 import SignUp from './pages/SignUp.jsx'
 import CreateListing from './pages/createListing.jsx'
 import UpdateListing from './pages/UpdateListing.jsx'
-
+import Listing from './pages/Listing.jsx'
 
 //components
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
 import  {PrivateRoute}  from './components/PrivateRoute.jsx'
+
 
 
 
@@ -29,6 +30,7 @@ function App() {
           <Route path='/' element={<Home/>}/>
           <Route path='/sign-in' element={<SignIn/>}/>
           <Route path='/sign-up' element={<SignUp/>}/>
+          <Route path='/listing/:listingId' element={<Listing/>}/>
           <Route element={<PrivateRoute/>}>
             <Route path='/profile' element={<Profile/>}/>
             <Route path='/create-listing' element={<CreateListing/>}/>
