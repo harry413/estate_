@@ -9,7 +9,8 @@ import helmet from 'helmet'
 
 const App = express();
 
-
+App.use(express.json());
+App.use(express.urlencoded({ extended: false }));
 App.use(cookieParser());
 App.use(cors());
 App.use(helmet());
@@ -21,7 +22,7 @@ import listingRouter from './routes/listingRoute.js'
 
 
 
-App.use(express.json());
+
 App.use('/api/user', userRouter);
 App.use('/api/auth', authRouter);
 App.use('/api/listing', listingRouter);
