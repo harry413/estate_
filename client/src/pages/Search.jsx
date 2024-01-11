@@ -1,8 +1,9 @@
-import {
-    useState
-} from 'react'
+import {useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom';
+import ListingCard from '../components/ListingCard';
 
 const Search = () => {
+    const navigate = useNavigate();
     const [sidebardata, setSidebardata] = useState({
         search: '',
         type: 'all',
@@ -12,13 +13,50 @@ const Search = () => {
         sort: 'created_at',
         order: 'desc',
     });
-    console.log(sidebardata);
+   
+    const [loading, setLoading] = useState(false);
+    const [listings, setListings] = useState([]);
+    console.log(listings);
+    useEffect(() => {
+        const urlParams = new URLSearchParams(location.search);
+        const searchFromUrl = urlParams.get('search');
+        const typeFromUrl = urlParams.get('type');
+        const parkingFromUrl = urlParams.get('parking');
+        const furnishedFromUrl = urlParams.get('furnished');
+        const offerFromUrl = urlParams.get('offer');
+        const sortFromUrl = urlParams.get('sort');
+        const orderFromUrl = urlParams.get('order');
+
+        if(searchFromUrl || typeFromUrl || parkingFromUrl || furnishedFromUrl || offerFromUrl || sortFromUrl || orderFromUrl ){
+            setSidebardata({
+                search: searchFromUrl || '',
+                type: typeFromUrl || 'all',
+                parking: parkingFromUrl === 'true' ? true : false,
+                furnished: furnishedFromUrl === 'true' ? true : false,
+                offer: offerFromUrl === 'true' ? true : false,
+                sort: sortFromUrl || 'created_at',
+                order: orderFromUrl || 'desc', 
+            });
+        }
+        const fetchData = async() => {
+            setLoading(true);
+            const searchQuery = urlParams.toString();
+            const res = await fetch(`/api/listing/get?${searchQuery}`)
+            const data = await res.json();
+            setListings(data);
+            setLoading(false);
+        }
+        fetchData();
+    }, [location.search]);
+
+
+
     const handleChange = (e)=>{
         if(e.target.id === 'all' || e.target.id === 'rent' || e.target.id === 'sale'){
-            setSidebardata({ ...sidebatdata, type: e.target.id });
+            setSidebardata({ ...sidebardata, type: e.target.id });
         }
         if(e.target.id === 'search'){
-            setSidebardata({ ...sidebatdata, search: e.target.value });
+            setSidebardata({ ...sidebardata, search: e.target.value });
         }
         if(e.target.id === 'parking' || e.target.id === 'furnished' || e.target.id === 'offer'){
             setSidebardata({ ...sidebardata, [e.target.id]: e.target.checked || e.target.checked === 'true' ? true : false})
@@ -30,10 +68,25 @@ const Search = () => {
             setSidebardata({ ...sidebardata, sort, order });
         }
     } 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const urlParams = new URLSearchParams();
+        urlParams.set('search', sidebardata.search);
+        urlParams.set('type', sidebardata.type);
+        urlParams.set('parking', sidebardata.parking);
+        urlParams.set('furnished', sidebardata.furnished);
+        urlParams.set('offer', sidebardata.offer);
+        urlParams.set('sort', sidebardata.sort);
+        urlParams.set('order', sidebardata.order);
+        const searchQuery = urlParams.toString();
+        navigate(`/search?${searchQuery}`);
+    }
+
+
   return (
     <div className='flex flex-col md:flex-row'>
         <div className=' p-6 border-b-2 md:border-r-2 md:min-h-screen'>
-            <form className='flex flex-col gap-8'>
+            <form onSubmit={handleSubmit} className='flex flex-col gap-8'>
                 <div className='flex items-center gap-2'>
                     <label className='whitespace-nowrap'>Search:</label>
                     <input type='text' id='search' placeholder='Search...' className='border rounded-lg p-3 w-full' value={sidebardata.search} onChange={handleChange}/>
@@ -80,8 +133,21 @@ const Search = () => {
                 <button className=' text-white bg-slate-700 uppercase rounded-lg p-2 hover:opacity-95'>search</button>
             </form>
         </div>
-        <div className=''>
+        <div className='flex-1'>
             <h1 className='text-3xl font-semibold p-3 text-slate-600 mt-5'> Listing Result</h1>
+            <div className="p-7 flex flex-wrap gap-4">
+                {!loading && listings.length === 0 && (
+                    <p className='text-slate-900 text-xl'>No listing found!</p>
+                )}
+                {
+                    loading && (
+                        <p className='text-slate-400 text-center w-full'>Loading....</p>
+                    )
+                }
+                {
+                    !loading && listings.map((listing) => <ListingCard key={listing._id} listing={listing}/>)
+                }
+            </div>
         </div>
     </div>
   )
