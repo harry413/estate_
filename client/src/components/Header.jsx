@@ -60,7 +60,7 @@ const Header = () => {
                         </li>
                     </Link>
                     
-                    <Link to='/sign-in'>
+                    <Link to='/profile'>
                         { currentUser? (
                             <img src={currentUser.avatar} alt='profile' className='rounded-full h-8 w-8 object-cover'/>
                         ): (
