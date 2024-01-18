@@ -1,7 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
 
-
-import PrivateRoute from './components/PrivateRoute.jsx'
 //importing pages
 import Home from './pages/Home.jsx'
 import SignIn from './pages/SignIn.jsx'
@@ -16,11 +14,9 @@ import Search from './pages/Search.jsx'
 
 
 //components
-
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
-
-
+import PrivateRoute from './components/PrivateRoute.jsx'
 
 
 function App() {
