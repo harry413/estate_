@@ -37,9 +37,10 @@ App.use('/api/user', userRouter);
 App.use('/api/auth', authRouter);
 App.use('/api/listing', listingRouter);
 
+App.use(express.static(path.resolve(__dirname, 'client/dist')));
 
 App.get('*', (req, res) => {
-    App.use(express.static(path.resolve(__dirname, 'client', 'dist')));
+    
     res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
 })
 
