@@ -16,7 +16,7 @@ import Search from './pages/Search.jsx'
 //components
 import Header from './components/Header.jsx'
 import Footer from './components/Footer.jsx'
-import PrivateRoute from './components/PrivateRoute'
+import PrivateRoute from './components/PrivateRoute.jsx'
 
 
 function App() {
