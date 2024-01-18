@@ -1,11 +1,11 @@
 import { Routes, Route } from 'react-router-dom'
 
 //importing pages
-import Home from './Pages/Home.jsx'
-import SignIn from './Pages/SignIn.jsx'
-import SignOut from './Pages/SignOut.jsx'
+import Home from './pages/Home.jsx'
+import SignIn from './pages/SignIn.jsx'
+import SignOut from './pages/SignOut.jsx'
 import Profile from './pages/Profile.jsx'
-import About from './Pages/About.jsx'
+import About from './pages/About.jsx'
 import SignUp from './pages/SignUp.jsx'
 import CreateListing from './pages/createListing.jsx'
 import UpdateListing from './pages/UpdateListing.jsx'
