@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import cookieParser from 'cookie-parser';
 import cors from 'cors'
 import helmet from 'helmet'
+import path from 'path'
 
 //Database connection mongodb
 mongoose.connect(process.env.MONGO_URL).then(() => {
@@ -25,6 +26,7 @@ App.use(cookieParser());
 App.use(cors());
 App.use(helmet());
 
+const __dirname = path.resolve();
 //importing routes
 import userRouter from "./routes/userRoute.js"
 import authRouter from './routes/authRoute.js'
@@ -36,6 +38,10 @@ App.use('/api/auth', authRouter);
 App.use('/api/listing', listingRouter);
 
 
+App.get('*', (req, res) => {
+    App.use(express.static(path.resolve(__dirname, 'client', 'dist')));
+    res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
+})
 
 
 App.use((err, req, res, next) => {
