@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGO_URL).then(() => {
 });
 
 
-
+const __dirname = path.resolve();
 
 const App = express();
 
@@ -26,7 +26,7 @@ App.use(cookieParser());
 App.use(cors());
 App.use(helmet());
 
-const __dirname = path.resolve();
+
 //importing routes
 import userRouter from "./routes/userRoute.js"
 import authRouter from './routes/authRoute.js'
@@ -37,11 +37,10 @@ App.use('/api/user', userRouter);
 App.use('/api/auth', authRouter);
 App.use('/api/listing', listingRouter);
 
-App.use(express.static(path.resolve(__dirname, 'client/dist')));
+App.use(express.static(path.join(__dirname, '/client/dist')));
 
 App.get('*', (req, res) => {
-    
-    res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 })
 
 
