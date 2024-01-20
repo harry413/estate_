@@ -32,13 +32,13 @@ const Header = () => {
             <div className='flex items-center justify-between max-w-6xl mx-auto p-3'>
                 <Link to='/'>
                     <h1 className='font-bold text-md flex flex-wrap cursor-pointer'>
-                        <span className='text-slate-600 text-xl gap-1'>Patidar</span>
+                        <span className='text-slate-600 text-xl '>Patidar</span>
                         <span className='text-slate-900 underline border pt-1.5'>Estate</span>
-                        <GiHouse className='text-xl text-slate-600 mt-2'/>
+                        <GiHouse className='hidden sm:inline text-xl text-slate-600 mt-2'/>
                     </h1>
                 </Link>
                 <form onSubmit={handleSubmit} className='bg-slate-50 p-2 rounded-lg flex items-center justify-between'>
-                    <input  type='text' placeholder='Search....'  className=' bg-transparent focus:outline-none w-24 sm:w-64' value={search} onChange={(e) => setSearch(e.target.value)}/>
+                    <input  type='text' placeholder='Search....'  className=' bg-transparent focus:outline-none w-24 lg:w-64' value={search} onChange={(e) => setSearch(e.target.value)}/>
                    <button>
                         <MdSearch className='text-xl text-slate-700'/>
                    </button>
@@ -64,7 +64,7 @@ const Header = () => {
                         { currentUser? (
                             <img src={currentUser.avatar} alt='profile' className='rounded-full h-8 w-8 object-cover'/>
                         ): (
-                            <li className='hidden sm:inline text-slate-700  px-2 mx-1 hover:text-gray-900 cursor-pointer rounded-md'>
+                            <li className='sm:inline text-slate-700  px-2 mx-1 hover:text-gray-900 cursor-pointer rounded-md'>
                                 Sign In
                             </li>
                         )}
