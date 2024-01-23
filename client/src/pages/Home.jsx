@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import {Link} from 'react-router-dom'
 import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore from 'swiper';
 import { Navigation } from 'swiper/modules';
+import SwiperCore from 'swiper';
 import 'swiper/css/bundle';
 import ListingCard from '../components/ListingCard';
 
 
 const Home = () => {
   SwiperCore.use([Navigation]);
-  const [offer, setOffer] = useState([]);
-  const [sale, setSale] = useState([]);
-  const [rent, setRent] = useState([]);
+  const [offerListings, setOfferListings] = useState([]);
+  const [saleListings, setSaleListings] = useState([]);
+  const [rentListings, setRentListings] = useState([]);
 
   useEffect(() => {
     const fetchOfferListings = async() => {
       try {
         const res = await fetch('/api/listing/get?offer=true&limit=4');
         const data = await res.json();
-        setOffer(data);
+        setOfferListings(data);
         fetchRentListings();
       } catch (error) {
         console.log(error);
@@ -29,7 +29,7 @@ const Home = () => {
       try {
         const res = await fetch('/api/listing/get?type=rent&limit=4');
         const data = await res.json();
-        setRent(data);
+        setRentListings(data);
         fetchSaleListings();
       } catch (error) {
         console.log(error);
@@ -39,7 +39,7 @@ const Home = () => {
       try {
         const res = await fetch('/api/listing/get?type=sale&limit=4');
         const data = await res.json();
-        setSale(data);
+        setSaleListings(data);
       } catch (error) {
         console.log(error);
       }
@@ -59,16 +59,16 @@ const Home = () => {
       </div>
       <Swiper navigation>
         {
-        offer && offer.length> 0 && offer.map((listing) => (
-          <SwiperSlide>
-            <div style={{ background:`url(${listing.imageUrls[0]}) center no-repeat`, backgroundSize:'cover' }} className="h-[500px]" key={listing._id}></div>
+        offerListings && offerListings.length > 0 && offerListings.map((listing) => (
+          <SwiperSlide  key={listing._id}>
+            <div style={{ background:`url(${listing.imageUrls[0]}) center no-repeat`, backgroundSize:'cover' }} className="h-[500px]"></div>
           </SwiperSlide>
         ))
       }
       </Swiper>
 
       <div className='max-w-6xl mx-auto p-3 flex flex-col gap-6 my-10'>
-        {offer && offer.length > 0 && (
+        {offerListings && offerListings.length > 0 && (
           <div className=''>
                 <div className='my-3'>
                   <h2 className='text-2xl font-bold text-slate-600'>Recent Offer</h2>
@@ -76,14 +76,14 @@ const Home = () => {
                 </div>
                 <div className='flex flex-wrap gap-4'>
                   {
-                    offer.map((listing) =>(
+                    offerListings.map((listing) =>(
                       <ListingCard listing={listing} key={listing._id} />
                     ))
                   }
                 </div>
           </div>
         )}
-        {rent && rent.length > 0 && (
+        {rentListings && rentListings.length > 0 && (
           <div className=''>
                 <div className='my-3'>
                   <h2 className='text-2xl font-bold text-slate-600'>Recent places for Rent</h2>
@@ -91,14 +91,14 @@ const Home = () => {
                 </div>
                 <div className='flex flex-wrap gap-4'>
                   {
-                    rent.map((listing) =>(
+                    rentListings.map((listing) =>(
                       <ListingCard listing={listing} key={listing._id} />
                     ))
                   }
                 </div>
           </div>
         )}
-        {sale && sale.length > 0 && (
+        {saleListings && saleListings.length > 0 && (
           <div className=''>
                 <div className='my-3'>
                   <h2 className='text-2xl font-bold text-slate-600'>Recent places for Sale</h2>
@@ -106,7 +106,7 @@ const Home = () => {
                 </div>
                 <div className='flex flex-wrap gap-4'>
                   {
-                    sale.map((listing) =>(
+                    saleListings.map((listing) =>(
                       <ListingCard listing={listing} key={listing._id} />
                     ))
                   }

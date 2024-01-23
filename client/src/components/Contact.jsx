@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Contact = ({listing}) => {
     const [landlord, setLandlord] = useState(null);
-    const [message, setMessage] = useState(' ');
+    const [message, setMessage] = useState('');
 
     const onChange = (e) => {
         setMessage(e.target.value)
