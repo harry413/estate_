@@ -15,7 +15,6 @@ mongoose.connect(process.env.MONGO_URL).then(() => {
     console.log(err);
 });
 
-
 const __dirname = path.resolve();
 
 const App = express();
@@ -26,12 +25,10 @@ App.use(cookieParser());
 App.use(cors());
 App.use(helmet());
 
-
 //importing routes
 import userRouter from "./routes/userRoute.js"
 import authRouter from './routes/authRoute.js'
 import listingRouter from './routes/listingRoute.js'
-
 
 App.use('/api/user', userRouter);
 App.use('/api/auth', authRouter);
@@ -43,7 +40,6 @@ App.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 })
 
-
 App.use((err, req, res, next) => {
     const statusCode = err.statusCode|| 500;
     const message = err.message ||"internal server error"
@@ -54,11 +50,7 @@ App.use((err, req, res, next) => {
     });
 });
 
-
-
 const PORT = 3000;
-
-
 
 App.get('/', (req, res) => {
     try{

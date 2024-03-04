@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
-import ListingCard from '../components/ListingCard';
+import ListingCard from '../components/ListingCard.jsx';
 
 const Search = () => {
     const navigate = useNavigate();

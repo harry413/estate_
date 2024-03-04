@@ -61,7 +61,7 @@ export const getUserListing = async(req, res, next) => {
 export const getUser = async(req, res, next) => {
    try {
     const user = await UserModel.findById(req.params.id);
-    if(!user) return next(errorHandler(404, 'user not found'));
+    if(!user) return next(errorHandler(404, 'User Not Found'));
 
     const {password: pass, ...rest} = user._doc;
 
