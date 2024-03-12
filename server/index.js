@@ -6,7 +6,6 @@ import mongoose from "mongoose";
 import cookieParser from 'cookie-parser';
 import cors from 'cors'
 import helmet from 'helmet'
-import path from 'path'
 
 //Database connection mongodb
 mongoose.connect(process.env.MONGO_URL).then(() => {
@@ -14,8 +13,6 @@ mongoose.connect(process.env.MONGO_URL).then(() => {
 }).catch((err) => {
     console.log(err);
 });
-
-const __dirname = path.resolve();
 
 const App = express();
 
@@ -34,11 +31,7 @@ App.use('/api/user', userRouter);
 App.use('/api/auth', authRouter);
 App.use('/api/listing', listingRouter);
 
-App.use(express.static(path.join(__dirname, '/client/dist')));
 
-App.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-})
 
 App.use((err, req, res, next) => {
     const statusCode = err.statusCode|| 500;
