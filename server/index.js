@@ -9,7 +9,7 @@ import helmet from 'helmet'
 
 //Database connection mongodb
 mongoose.connect(process.env.MONGO_URL).then(() => {
-    console.log("Database connected successfully ")
+    console.log("Database connected successfully")
 }).catch((err) => {
     console.log(err);
 });
@@ -26,6 +26,7 @@ App.use(helmet());
 import userRouter from "./routes/userRoute.js"
 import authRouter from './routes/authRoute.js'
 import listingRouter from './routes/listingRoute.js'
+
 
 App.use('/api/user', userRouter);
 App.use('/api/auth', authRouter);
@@ -47,7 +48,7 @@ const PORT = 3000;
 
 App.get('/', (req, res) => {
     try{
-        res.json({message:'hello welcome to home page!!!'})
+        res.json({message:'Hello welcome to home page!!!'})
     }catch(err){
         console.log(err);
         res.json({message:err});
